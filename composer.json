@@ -26,7 +26,7 @@
     "respect/validation": "^1.1",
     "symfony/var-dumper": "^5.4.x-dev",
     "justinrainbow/json-schema": "5.x-dev",
-    "league/flysystem": "^1.0.40",
+    "league/flysystem": "^1.1",
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-dom": "*",

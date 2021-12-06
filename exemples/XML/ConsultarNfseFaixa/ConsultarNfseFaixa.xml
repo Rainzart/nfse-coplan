@@ -1,0 +1,48 @@
+<ConsultarNfseFaixaEnvio xmlns="http://www.abrasf.org.br/nfse.xsd">
+	<Prestador>
+		<CpfCnpj>
+			<Cnpj></Cnpj>
+		</CpfCnpj>
+		<InscricaoMunicipal></InscricaoMunicipal>
+	</Prestador>
+	<Faixa>
+		<NumeroNfseInicial></NumeroNfseInicial>
+		<NumeroNfseFinal></NumeroNfseFinal>
+	</Faixa>
+	<Pagina></Pagina>
+</ConsultarNfseFaixaEnvio>
+
+
+-------------------------------------------------------------
+
+<!--Com o cabeçalho Soap-->
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:e="http://www.abrasf.org.br/nfse.xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <e:ConsultarNfseFaixa>
+        <nfseCabecMsg>
+					<![CDATA[
+						 <cabecalho xmlns="http://www.abrasf.org.br/nfse.xsd" versao="2.02"><versaoDados>2.02</versaoDados></cabecalho>
+					]]>
+				</nfseCabecMsg>
+        <nfseDadosMsg>
+					<![CDATA[
+						<ConsultarNfseFaixaEnvio xmlns="http://www.abrasf.org.br/nfse.xsd">
+							<Prestador>
+								<CpfCnpj>
+									<Cnpj></Cnpj>
+								</CpfCnpj>
+								<InscricaoMunicipal></InscricaoMunicipal>
+							</Prestador>
+							<Faixa>
+								<NumeroNfseInicial></NumeroNfseInicial>
+								<NumeroNfseFinal></NumeroNfseFinal>
+							</Faixa>
+							<Pagina></Pagina>
+						</ConsultarNfseFaixaEnvio>
+					]]>
+				</nfseDadosMsg>
+      </e:ConsultarNfseFaixa>
+   </soapenv:Body>
+</soapenv:Envelope>

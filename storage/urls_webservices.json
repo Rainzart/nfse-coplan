@@ -1,0 +1,11 @@
+{
+    "5100201": {
+        "municipio": "Água Boa",
+        "uf": "MT",
+        "homologacao": "https:\/\/www.gp.srv.br/tributario_homologacao\/servlet\/anfse_web_service?wsdl",
+        "producao": "https:\/\/www.gp.srv.br/tributario_aguaboa\/servlet\/anfse_web_service?wsdl",
+        "version": "2.01",
+        "msgns": "http://www.abrasf.org.br/nfse.xsd",
+        "soapns": "http://www.issnetonline.com.br/webservice/nfd"
+    }
+}

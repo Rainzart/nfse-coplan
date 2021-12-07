@@ -30,7 +30,7 @@ abstract class SoapBase implements SoapInterface
     /**
      * @var int
      */
-    protected $soaptimeout = 20;
+    protected $soaptimeout = 30;
     /**
      * @var string
      */

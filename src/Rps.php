@@ -7,6 +7,7 @@ namespace HaDDeR\NfseCoplan;
  *
  */
 
+use DOMException;
 use DOMNode;
 use NFePHP\Common\DOMImproved as Dom;
 use stdClass;
@@ -34,11 +35,11 @@ class Rps implements RpsInterface
     /**
      * Constructor
      * @param stdClass|null $std
+     * @throws DOMException
      */
     public function __construct(stdClass $std = null)
     {
-        $this->std = $std;
-        $this->init();
+        $this->init($std);
         $this->dom = new Dom('1.0', 'UTF-8');
         $this->dom->preserveWhiteSpace = false;
         $this->dom->formatOutput = false;
@@ -49,8 +50,10 @@ class Rps implements RpsInterface
 //        $this->rps->appendChild($att);
     }
 
-    public function render()
+    public function render(stdClass $std = null)
     {
+        $this->init($std);
+
         $rps_inner = $this->dom->createElement('Rps');
 //        $att = $this->dom->createAttribute('Id');
 //        $att->value = $this->std->lote.'s';
@@ -400,19 +403,14 @@ class Rps implements RpsInterface
         return str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $this->dom->saveXML());
     }
 
-    public function renderSigned()
-    {
-        dd($this->render());
-    }
-
     /**
      * Inicialize properties and valid input
-     * @param stdClass $rps
+     * @param stdClass|null $rps
      */
-    private function init()
+    private function init(stdClass $rps = null)
     {
-        if (!empty($this->std)) {
-            $this->std = $this->propertiesToLower($this->std);
+        if (!empty($rps)) {
+            $this->std = $this->propertiesToLower($rps);
             if (empty($this->std->version)) {
                 $this->std->version = '2.01';
             }

@@ -326,12 +326,14 @@ class Rps implements RpsInterface
             $tom->endereco->numero,
             false
         );
-        $this->dom->addChild(
-            $dom_endereco_tom,
-            'Complemento',
-            $tom->endereco->complemento,
-            false
-        );
+        if (isset($tom->endereco->complemento)) {
+            $this->dom->addChild(
+                $dom_endereco_tom,
+                'Complemento',
+                $tom->endereco->complemento,
+                false
+            );
+        }
         $this->dom->addChild(
             $dom_endereco_tom,
             'Bairro',
@@ -426,6 +428,11 @@ class Rps implements RpsInterface
     public function setFormatOutput(bool $formatOutput)
     {
         $this->dom->formatOutput = $formatOutput;
+    }
+
+    public function setStd(stdClass $std)
+    {
+        $this->init($std);
     }
 
     /**

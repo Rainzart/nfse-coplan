@@ -43,21 +43,19 @@ class Rps implements RpsInterface
         $this->dom = new Dom('1.0', 'UTF-8');
         $this->dom->preserveWhiteSpace = false;
         $this->dom->formatOutput = false;
-
-        $this->rps = $this->dom->createElement('InfDeclaracaoPrestacaoServico');
-//        $att = $this->dom->createAttribute('Id');
-//        $att->value = $this->std->lote;
-//        $this->rps->appendChild($att);
     }
 
     public function render(stdClass $std = null)
     {
-        $this->init($std);
+        if ($this->dom->hasChildNodes()) {
+            $this->dom = new Dom('1.0', 'UTF-8');
+            $this->dom->preserveWhiteSpace = false;
+            $this->dom->formatOutput = false;
+        }
 
+        $this->init($std);
+        $this->rps = $this->dom->createElement('InfDeclaracaoPrestacaoServico');
         $rps_inner = $this->dom->createElement('Rps');
-//        $att = $this->dom->createAttribute('Id');
-//        $att->value = $this->std->lote.'s';
-//        $rps_inner->appendChild($att);
 
         $identificacaoRps = $this->dom->createElement('IdentificacaoRps');
         $this->dom->addChild(

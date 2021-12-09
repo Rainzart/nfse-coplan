@@ -10,7 +10,11 @@
   "autoload": {
     "psr-4": {
       "HaDDeR\\NfseCoplan\\": "src/"
-    }
+    },
+    "files": [
+      "Helpers.php",
+      "Lists.php"
+    ]
   },
   "authors": [
     {
@@ -30,6 +34,13 @@
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-dom": "*",
-    "ext-curl": "*"
-  }
+    "ext-curl": "*",
+    "tecnickcom/tcpdf": "^6.4",
+    "ext-simplexml": "*",
+    "ext-gd": "*"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "prefer-stable": true
 }

@@ -1,6 +1,7 @@
 {
     "5100201": {
         "municipio": "Água Boa",
+        "brasao": "brasao_agua_boa.png",
         "uf": "MT",
         "homologacao": "https:\/\/www.gp.srv.br/tributario_homologacao\/servlet\/anfse_web_service?wsdl",
         "producao": "https:\/\/www.gp.srv.br/tributario_aguaboa\/servlet\/anfse_web_service?wsdl",

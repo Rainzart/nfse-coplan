@@ -60,11 +60,16 @@ class Danfse
 //        $this->xml = $xml;
         if (!empty($xml)) {
             $this->dom = simplexml_load_string($xml);
-            if (!isset($this->dom->CompNfse) and !isset($this->dom->CompNfse->Nfse) and !isset($this->dom->CompNfse->Nfse->InfNfse)) {
-                throw new Exception('Isso não é um NFSe.');
+            if (!isset($this->dom->CompNfse) and !isset($this->dom->ListaNfse)) {
+                throw new Exception('Isso não é uma NFSe.');
             }
-            $this->infNfse = $this->dom->CompNfse->Nfse->InfNfse;
-            $this->infDecServico = $this->dom->CompNfse->Nfse->InfNfse->DeclaracaoPrestacaoServico->InfDeclaracaoPrestacaoServico;
+            if(isset($this->dom->CompNfse)) {
+                $this->infNfse = $this->dom->CompNfse->Nfse->InfNfse;
+                $this->infDecServico = $this->dom->CompNfse->Nfse->InfNfse->DeclaracaoPrestacaoServico->InfDeclaracaoPrestacaoServico;
+            } else {
+                $this->infNfse = $this->dom->ListaNfse->CompNfse->Nfse->InfNfse;
+                $this->infDecServico = $this->dom->ListaNfse->CompNfse->Nfse->InfNfse->DeclaracaoPrestacaoServico->InfDeclaracaoPrestacaoServico;
+            }
         }
     }
 

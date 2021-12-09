@@ -12,8 +12,7 @@
       "HaDDeR\\NfseCoplan\\": "src/"
     },
     "files": [
-      "Helpers.php",
-      "Lists.php"
+      "Helpers.php"
     ]
   },
   "authors": [

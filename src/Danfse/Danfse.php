@@ -175,7 +175,7 @@ class Danfse
         $this->pdf->SetFont('Calibri', '', 8.8);
 //        $this->pdf->Cell(65.5, 16.3, 'Identificação da Nota Fiscal Eletrônica', 'LBR', true, 'C');
         $txt = 'Natureza da Operação' . PHP_EOL;
-        $txt .= mb_strtoupper(listExigibilidadeIss((int)$this->infDecServico->Servico->ExigibilidadeISS)) . PHP_EOL;
+        $txt .= mb_strtoupper($this->listExigibilidadeIss((int)$this->infDecServico->Servico->ExigibilidadeISS)) . PHP_EOL;
         $txt .= 'Número do RPS' . PHP_EOL;
         $txt .= $this->infDecServico->Rps->IdentificacaoRps->Numero ?? null;
         $this->pdf->MultiCell(65.5, 16.3, $txt, 'LBR', 'C', false, false, '', '', true, 0, false, true, 20, 'T', '');
@@ -291,7 +291,7 @@ class Danfse
         $this->pdf->Cell(21.4, 5.5, 'CNAE', 'R', true, 'C');
 
         $this->pdf->SetFont('Calibri', '', 6);
-        $txt = listItensServicos((int)$this->infDecServico->Servico->ItemListaServico);
+        $txt = $this->listItensServicos((int)$this->infDecServico->Servico->ItemListaServico);
         $this->pdf->MultiCell(128.9, 11.3, $txt, 'LBR', 'L', false, false);
 
         $this->pdf->SetFont('Calibri', '', 10);
@@ -313,7 +313,7 @@ class Danfse
         $this->pdf->SetFont('Calibri', 'B', 8.5);
         $this->pdf->Cell(155.9, 5, 'ISSQN Retido', 'LB', false, 'L', false, '', false, true);
         $this->pdf->SetFont('Calibri', 'B', 10);
-        $this->pdf->Cell(41.1, 5, listSimNao((int)$this->infDecServico->Servico->IssRetido), 'BR', true, 'R', false, '', false, true);
+        $this->pdf->Cell(41.1, 5, ((int)$this->infDecServico->Servico->IssRetido == 1 ? 'SIM' : 'NÃO'), 'BR', true, 'R', false, '', false, true);
 
         $this->pdf->Ln(0.8);
         $this->pdf->SetFont('Calibri', 'B', 10);
@@ -389,7 +389,7 @@ class Danfse
         $this->pdf->Cell(42.2, 4, 'Código de Autenticidade', 'LR', true, 'C', false, '', false, true);
 
         $this->pdf->SetFont('Calibri', '', 10);
-        $this->pdf->Cell(59.7, 5.0, mb_strtoupper(listExigibilidadeIss((int)$this->infDecServico->Servico->ExigibilidadeISS)), 'LR', false, 'L', false, '', false, true);
+        $this->pdf->Cell(59.7, 5.0, mb_strtoupper($this->listExigibilidadeIss((int)$this->infDecServico->Servico->ExigibilidadeISS)), 'LR', false, 'L', false, '', false, true);
         $this->pdf->Cell(48.3, 5.0, date('d/m/Y', strtotime($this->infNfse->DataEmissao)), 'LR', false, 'C', false, '', false, true);
         $this->pdf->Cell(42.2, 5.0, ($this->infNfse->CodigoVerificacao ?? null), 'LR', true, 'C', false, '', false, true);
 
@@ -489,4 +489,36 @@ class Danfse
         $this->pdf->SetY($customY + 238);
         $this->pdf->Cell(197, 20, 'CANCELADA', '', false, 'C');
     }
+
+    private function listItensServicos(int $id)
+    {
+        $dados = [
+            2501 => '25.01 - Funerais, inclusive fornecimento de caixão, urna ou esquifes; aluguel de capela; transporte do corpo cadavérico; fornecimento de flores, coroas e outros paramentos; desembaraço de certidão de óbito; fornecimento de véu, essa e outros adornos; embalsamento, embelezamento, conservação ou restauração de cadáveres.',
+        ];
+        if (!empty($id)) {
+            return $dados[$id];
+        } else {
+            return $id;
+        }
+    }
+
+    private function listExigibilidadeIss(int $id)
+    {
+        $dados = [
+            1 => 'Exigível',
+            2 => 'Não incidência',
+            3 => 'Isenção',
+            4 => 'Exportação',
+            5 => 'Imunidade',
+            6 => 'Exigibilidade Suspensa por Decisão Judicial',
+            7 => 'Exigibilidade Suspensa por Processo Administrativo',
+        ];
+        if (!empty($id)) {
+            return $dados[$id];
+        } else {
+            return $id;
+        }
+    }
+
+
 }
